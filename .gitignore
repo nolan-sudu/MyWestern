@@ -1,0 +1,14 @@
+# Node
+node_modules/
+.env
+dist/
+*.log
+
+# VSCode
+.vscode/
+
+# OS
+.DS_Store
+
+# Prisma
+prisma/migrations/
