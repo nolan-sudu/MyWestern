@@ -1,0 +1,53 @@
+### Register first user
+POST http://localhost:4000/api/auth/register
+Content-Type: application/json
+
+{
+  "email": "user1@uwo.ca",
+  "password": "Test1234!",
+  "name": "Nolan Suduwelikanda"
+}
+
+### Register second user
+POST http://localhost:4000/api/auth/register
+Content-Type: application/json
+
+{
+  "email": "user2@uwo.ca",
+  "password": "Test1234!",
+  "name": "Jane Doe"
+}
+
+### Login first user
+POST http://localhost:4000/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "user1@uwo.ca",
+  "password": "Test1234!"
+}
+
+### Login second user
+POST http://localhost:4000/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "user2@uwo.ca",
+  "password": "Test1234!"
+}
+
+### Get current user info (first user) - replace <TOKEN1> with JWT from login response
+GET http://localhost:4000/api/user/me
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsImVtYWlsIjoidXNlcjFAdXdvLmNhIiwiaWF0IjoxNzYyODEyNjMzLCJleHAiOjE3NjI4OTkwMzN9.L0dZuWhoLFLmr3A3qpiqUdAmvK4iyrJtAOYvjuo2Qyo
+
+### Get current user info (second user) - replace <TOKEN2> with JWT from login response
+GET http://localhost:4000/api/user/me
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTQsImVtYWlsIjoidXNlcjJAdXdvLmNhIiwiaWF0IjoxNzYyODEyNjUxLCJleHAiOjE3NjI4OTkwNTF9.apmGQ846Bm9Nz9f0Dxaw4VYQp_IQFTyVvDGU03yYx5g
+
+### Access dashboard (first user) - replace <TOKEN1>
+GET http://localhost:4000/api/dashboard
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsImVtYWlsIjoidXNlcjFAdXdvLmNhIiwiaWF0IjoxNzYyODEyNjMzLCJleHAiOjE3NjI4OTkwMzN9.L0dZuWhoLFLmr3A3qpiqUdAmvK4iyrJtAOYvjuo2Qyo
+
+### Access dashboard (second user) - replace <TOKEN2>
+GET http://localhost:4000/api/dashboard
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTQsImVtYWlsIjoidXNlcjJAdXdvLmNhIiwiaWF0IjoxNzYyODEyNjUxLCJleHAiOjE3NjI4OTkwNTF9.apmGQ846Bm9Nz9f0Dxaw4VYQp_IQFTyVvDGU03yYx5g
