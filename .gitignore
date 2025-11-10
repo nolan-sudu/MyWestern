@@ -7,8 +7,12 @@ dist/
 # VSCode
 .vscode/
 
+# Visual Studio (full workspace folder)
+.vs/
+
 # OS
 .DS_Store
 
 # Prisma
 prisma/migrations/
+prisma/client/
