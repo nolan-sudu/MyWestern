@@ -1,6 +1,6 @@
 # MyWestern
 
-**A secure, student dashboard for Western University that displays various university resources, events, and course information in one customizable platform.**
+**A secure, student dashboard for Western University that displays various university resources, events, and course information in one customizable platform.** (IN PROGRESS)
 
 ---
 
