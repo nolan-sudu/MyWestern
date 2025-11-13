@@ -1,0 +1,28 @@
+{
+  "name": "mywestern",
+  "version": "1.0.0",
+  "description": "**A secure, student dashboard for Western University that displays various university resources, events, and course information in one customizable platform.** (IN PROGRESS)",
+  "main": "index.js",
+  "scripts": {
+  "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+  "dev:backend": "npm run dev --prefix backend",
+  "dev:frontend": "npm run dev --prefix frontend -- --open"
+  },
+  "dependencies": {
+    "concurrently": "^9.2.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nolan-sudu/MyWestern.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/nolan-sudu/MyWestern/issues"
+  },
+  "homepage": "https://github.com/nolan-sudu/MyWestern#readme"
+}
+
+
