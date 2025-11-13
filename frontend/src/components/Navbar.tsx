@@ -1,26 +1,32 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import "./Navbar.css"; 
 
 export default function Navbar() {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleLogout = () => {
     logout();
     navigate("/");
   };
 
+  const isHome = location.pathname === "/";
+
   return (
-    <nav style={{ padding: "1rem", borderBottom: "1px solid #ccc" }}>
-      <Link to="/" style={{ marginRight: "1rem" }}>Home</Link>
-      {!user && <Link to="/login" style={{ marginRight: "1rem" }}>Login</Link>}
-      {!user && <Link to="/register" style={{ marginRight: "1rem" }}>Register</Link>}
-      {user && (
-        <>
-          <Link to="/dashboard" style={{ marginRight: "1rem" }}>Dashboard</Link>
-          <button onClick={handleLogout}>Logout</button>
-        </>
-      )}
+    <nav className="navbar">
+      <div className="navbar-links">
+        {!isHome && <Link to="/" className="navbar-button">Home</Link>}
+        {!user && <Link to="/login" className="navbar-button">Login</Link>}
+        {!user && <Link to="/register" className="navbar-button">Register</Link>}
+        {user && (
+          <button onClick={handleLogout} className="navbar-button">
+            Logout
+          </button>
+        )}
+      </div>
     </nav>
   );
 }
+
