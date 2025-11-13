@@ -20,6 +20,10 @@ export default function Navbar() {
         {!isHome && <Link to="/" className="navbar-button">Home</Link>}
         {!user && <Link to="/login" className="navbar-button">Login</Link>}
         {!user && <Link to="/register" className="navbar-button">Register</Link>}
+
+        { }
+        {user && isHome && <Link to="/dashboard" className="navbar-button">Dashboard</Link>}
+
         {user && (
           <button onClick={handleLogout} className="navbar-button">
             Logout
@@ -29,4 +33,5 @@ export default function Navbar() {
     </nav>
   );
 }
+
 

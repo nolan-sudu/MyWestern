@@ -1,0 +1,53 @@
+.notfound-container {
+  position: relative;
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.back-button {
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
+  background: rgba(0, 0, 1, 0.6);
+  color: #ffffff;
+  border: 2px solid rgba(0, 0, 1, 0);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.523);
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.back-button:hover {
+  background: #6c00a2;
+  color: #ebeaea;
+}
+
+.notfound-form-wrapper {
+  background: rgba(0, 0, 1, 0.6);
+  padding: 2rem 3rem;
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  text-align: center;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.813);
+}
+
+.notfound-form-wrapper h1 {
+  color: white;
+  margin-bottom: 1rem;
+  font-size: 60px;
+  font-family:'Courier New', Courier, monospace;
+  font-weight:bold;
+}
+
+.notfound-form-wrapper p {
+  color: #fff;
+  font-size: 1.2rem;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}

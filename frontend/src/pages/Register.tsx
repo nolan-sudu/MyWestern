@@ -95,6 +95,7 @@ export default function Register() {
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            maxLength={25}
             required
           />
           {passwordError && <p className="error-text">{passwordError}</p>}
