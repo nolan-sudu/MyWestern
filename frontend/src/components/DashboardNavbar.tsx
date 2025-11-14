@@ -15,11 +15,26 @@ export default function DashboardNavbar({ user }: { user: any }) {
         </button>
         {showWidgetsMenu && (
           <div className="dropdown">
-            <button>Add Widget</button>
-            <button>Remove Widget</button>
-            <button>Rearrange Widgets</button>
+
+            <div style={{ padding: "8px 15px", fontWeight: 600, opacity: 0.7 }}>
+              Add Widget
+            </div>
+
+            <button>Academic Calendar</button>
+            <button>Courses Overview</button>
+            <button>Assignments Tracker</button>
+            <button>Fees & Finances</button>
+            <button>Campus Map</button>
+            <button>Quick Access Links</button>
+            <button>Local Weather</button>
+            <button>GPA Calculator</button>
+            <button>Motivational Quote</button>
+            <button>Study Timer</button>
+            <button>Links Folder</button>
+
           </div>
         )}
+
       </div>
 
       <div className="navbar-center">
@@ -32,7 +47,7 @@ export default function DashboardNavbar({ user }: { user: any }) {
         </button>
         {showSettingsMenu && (
           <div className="dropdown right">
-            <button>Profile Management</button>
+            <button>Profile</button>
             <button onClick={logout}>Logout</button>
           </div>
         )}
