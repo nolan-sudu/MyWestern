@@ -1,18 +1,18 @@
 .widget-grid-container {
   width: 100%;
   display: flex;
-  justify-content: center; /* center the grid */
+  justify-content: center;
   padding: 2rem;
   box-sizing: border-box;
 }
 
 .widget-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* auto-adjust columns */
-  grid-auto-rows: 300px; /* base row height */
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-auto-rows: 300px;
   gap: 1rem;
-  width: 80%; /* centered in 80% of screen */
-  max-width: 1200px; /* optional max width */
+  width: 80%;
+  max-width: 1200px;
 }
 
 .widget-box {
@@ -27,14 +27,17 @@
   display: flex;
   flex-direction: column;
   overflow: visible;
+  max-width: 300px;
+  min-width: 250px;
 }
 
 .widget-box.dragging {
   transform: scale(1.03);
-  box-shadow: 0 0 25px rgba(0, 0, 0, 0.7);
+  box-shadow: 0 0 28px rgba(0, 0, 0, 0.8);
   z-index: 10;
 }
 
+/* Widget header */
 .widget-header {
   display: flex;
   justify-content: center;
@@ -49,10 +52,11 @@
   font-weight: bold;
 }
 
+/* Action buttons (Edit/Delete) */
 .widget-actions {
   position: absolute;
-  top: -30px;
-  right: -30px;
+  top: -28px;
+  right: -28px;
   display: flex;
   gap: 0.4rem;
   opacity: 0;
@@ -65,12 +69,12 @@
 }
 
 .widget-box:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.9);
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.9);
 }
 
 .widget-btn {
-  background: rgba(14, 14, 14, 0.525);
+  background: rgba(14, 14, 14, 0.55);
   border: none;
   color: white;
   padding: 4px 6px;
@@ -78,7 +82,7 @@
   cursor: pointer;
   font-size: 0.9rem;
   transition: background 0.2s, transform 0.2s;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 }
 
 .widget-btn:hover {
@@ -86,6 +90,7 @@
   transform: scale(1.1);
 }
 
+/* Widget content */
 .widget-content {
   flex: 1;
   display: flex;
@@ -96,16 +101,17 @@
   font-size: 0.9rem;
 }
 
+/* Grid sizing */
 .widget-1x1 {
   grid-row: span 1;
   grid-column: span 1;
 }
 
 .widget-1x2 {
-  grid-row: span 2; /* vertical 1x2 */
+  grid-row: span 2; /* vertical stack */
   grid-column: span 1;
 }
 
 .widget-span-2 {
-  grid-column: span 2; /* horizontal 1x2 */
+  grid-column: span 2; /* horizontal expansion */
 }

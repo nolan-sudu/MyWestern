@@ -2,18 +2,75 @@ import { Navigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import DashboardNavbar from "../components/DashboardNavbar";
 import WidgetGrid from "../components/WidgetGrid";
+import { useState } from "react";
 import "./Dashboard.css";
+
+export interface Widget {
+  id: string;
+  title: string;
+  emoji: string;
+  size: "1x1" | "1x2";
+  spanCol?: number;
+}
+
+const ALL_WIDGETS: Widget[] = [
+  { id: "academic-calendar", title: "Academic Calendar", emoji: "📅", size: "1x1" },
+  { id: "courses-overview", title: "Courses Overview", emoji: "📚", size: "1x1" },
+  { id: "assignments", title: "Assignments Tracker", emoji: "📝", size: "1x2" },
+  { id: "fees", title: "Fees & Finances", emoji: "💰", size: "1x1" },
+  { id: "map", title: "Campus Map", emoji: "🗺️", size: "1x2" },
+  { id: "quick-access", title: "Quick Access", emoji: "⚡", size: "1x1" },
+  { id: "weather", title: "Local Weather & Alerts", emoji: "☀️", size: "1x1" },
+  { id: "gpa", title: "GPA Calculator", emoji: "🎓", size: "1x1" },
+  { id: "quote", title: "Daily Quote", emoji: "💡", size: "1x1", spanCol: 2 },
+  { id: "links-folder", title: "Links Folder", emoji: "🔗", size: "1x2" },
+  { id: "study-timer", title: "Study Timer", emoji: "⏱️", size: "1x2" }
+];
 
 export default function Dashboard() {
   const { user } = useAuth();
+  const [widgets, setWidgets] = useState<Widget[]>([
+  ]);
 
   if (!user) return <Navigate to="/login" />;
 
+  const handleAddWidget = (id: string) => {
+    const widget = ALL_WIDGETS.find((w) => w.id === id);
+    if (!widget) return;
+
+    if (widgets.some((w) => w.id === id)) return;
+
+    setWidgets([...widgets, widget]);
+  };
+
+  const handleRemoveWidget = (id: string) => {
+    setWidgets(widgets.filter((w) => w.id !== id));
+  };
+
+  // Reordering from drag/drop
+  const handleReorder = (newOrder: Widget[]) => {
+    setWidgets(newOrder);
+  };
+
+  // Compute which widgets are still available to add
+  const unusedWidgets = ALL_WIDGETS.filter(
+    (w) => !widgets.some((active) => active.id === w.id)
+  );
+
   return (
     <div className="dashboard-container">
-      <DashboardNavbar user={user} />
+      <DashboardNavbar
+        user={user}
+        availableWidgets={unusedWidgets}
+        onAddWidget={handleAddWidget}
+      />
+
       <div className="dashboard-content">
-        <WidgetGrid />
+        <WidgetGrid
+          widgets={widgets}
+          onRemoveWidget={handleRemoveWidget}
+          onReorder={handleReorder}
+        />
       </div>
     </div>
   );

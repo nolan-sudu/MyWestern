@@ -3,14 +3,14 @@
   flex-direction: column;
   width: 100%;
   min-height: 100vh;
-  background: rgba(0, 0, 0, 0.05); /* subtle background */
+  background: rgba(0, 0, 0, 0.05);
   color: white;
 }
 
 .dashboard-content {
   flex: 1;
   display: flex;
-  justify-content: center; /* center grid horizontally */
+  justify-content: center;
   align-items: flex-start;
-  padding: 2rem;
+  padding: 2rem 1rem;
 }

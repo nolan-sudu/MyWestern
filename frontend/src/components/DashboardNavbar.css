@@ -3,28 +3,29 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-  background: rgba(0, 0, 0, 0.375);
-  backdrop-filter: blur(10px);
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(12px);
   color: white;
   position: sticky;
   top: 0;
   z-index: 1000;
 }
 
-.navbar-left, .navbar-right {
+.navbar-left,
+.navbar-right {
   position: relative;
 }
 
 .navbar-center {
-  font-size: 2rem;
+  font-size: 1.8rem;
   font-weight: bold;
   text-align: center;
   font-family: 'Courier New', Courier, monospace;
 }
 
 .navbar-button {
-  background: rgba(0, 0, 1, 0.6);
-  border: 2px solid rgba(0, 0, 1, 0);
+  background: rgba(0, 0, 1, 0.55);
+  border: 2px solid transparent;
   border-radius: 8px;
   padding: 0.4rem 0.8rem;
   color: white;
@@ -37,37 +38,56 @@
   background: #6c00a2;
 }
 
+/* DROPDOWNS */
 .dropdown {
   position: absolute;
-  top: 2.5rem;
-  left: 0;
+  top: 2.6rem;
   background: rgba(0, 0, 1, 0.65);
-  backdrop-filter: blur(10px);
-  border-radius: 8px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.662);
-  font-family: 'Courier New', Courier, monospace;
+  backdrop-filter: blur(14px);
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
   display: flex;
   flex-direction: column;
   padding: 0.5rem 0;
-  min-width: 185px;
+  min-width: 200px;
   z-index: 1000;
+  font-family: 'Courier New', Courier, monospace;
 }
 
-.dropdown.right {
+/* LEFT DROPDOWN (Widget menu) */
+.widget-dropdown {
+  left: 0;
+}
+
+/* RIGHT DROPDOWN (Settings menu) */
+.settings-dropdown {
   right: 0;
-  left: auto; /* ensures right alignment */
+  left: auto;
+}
+
+.dropdown-header {
+  padding: 8px 14px;
+  font-weight: 600;
+  opacity: 0.75;
+}
+
+.dropdown-empty {
+  padding: 8px 14px;
+  opacity: 0.6;
+  font-size: 0.9rem;
 }
 
 .dropdown button {
-  background: rgba(0, 0, 1, 0);
+  background: transparent;
   border: none;
   color: white;
-  text-align: left;
   padding: 0.5rem 1rem;
+  text-align: left;
   cursor: pointer;
-  transition: background 0.2s ease;
+  transition: background 0.18s ease;
 }
 
 .dropdown button:hover {
   background: #6c00a2;
 }
+
