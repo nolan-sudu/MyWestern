@@ -1,46 +1,183 @@
-import { useState, useEffect } from "react";
-import type { WidgetProps } from "../../types";
-import "./WidgetBase.css";
+import { useState } from "react";
+import type { Widget } from "../../types";
 
-type CourseGPA = { course: string; grade: number };
+interface Course {
+  id: string;
+  name: string;
+  grade: number;
+  credits: number;
+}
 
-export default function GPAWidget({ widget, onChange }: WidgetProps) {
-  const [courses, setCourses] = useState<CourseGPA[]>(widget.content || []);
+interface Props {
+  widget: Widget;
+  onChange: (newContent: any) => void;
+}
 
-  useEffect(() => onChange(courses), [courses]);
+export default function GPAWidget({ widget, onChange }: Props) {
+  const [courses, setCourses] = useState<Course[]>(widget.content?.courses || []);
+  const [isEditing, setIsEditing] = useState(false);
 
-  const addCourse = () => setCourses([...courses, { course: "", grade: 0 }]);
+  const handleAddCourse = () => {
+    const newCourse: Course = { id: Date.now().toString(), name: "", grade: 0, credits: 1 };
+    setCourses([...courses, newCourse]);
+    setIsEditing(true);
+  };
 
-  function updateCourse<K extends keyof CourseGPA>(index: number, field: K, value: CourseGPA[K]) {
-    const updated = [...courses];
-    updated[index][field] = value;
+  const handleDeleteCourse = (id: string) => {
+    const updated = courses.filter(c => c.id !== id);
     setCourses(updated);
-  }
+    onChange({ courses: updated });
+  };
 
-  const averageGPA =
-    courses.length > 0 ? (courses.reduce((acc, c) => acc + c.grade, 0) / courses.length).toFixed(2) : "0.00";
+  const handleCourseChange = (id: string, field: keyof Course, value: string | number) => {
+    const updated = courses.map(c =>
+      c.id === id ? { ...c, [field]: field === "name" ? value : Number(value) } : c
+    );
+    setCourses(updated);
+  };
+
+  const confirmChanges = () => {
+    onChange({ courses });
+    setIsEditing(false);
+  };
+
+  const totalCredits = courses.reduce((sum, c) => sum + c.credits, 0);
+  const weightedAverage = totalCredits
+    ? courses.reduce((sum, c) => sum + c.grade * c.credits, 0) / totalCredits
+    : 0;
 
   return (
-    <div>
-      <div style={{ marginBottom: 6 }}>Current GPA: {averageGPA}</div>
-      {courses.map((c, i) => (
-        <div key={i} style={{ display: "flex", marginBottom: 4 }}>
-          <input
-            placeholder="Course Name"
-            value={c.course}
-            onChange={(e) => updateCourse(i, "course", e.target.value)}
-            style={{ flex: 2, marginRight: 4 }}
-          />
-          <input
-            placeholder="Grade"
-            type="number"
-            value={c.grade}
-            onChange={(e) => updateCourse(i, "grade", Number(e.target.value))}
-            style={{ flex: 1 }}
-          />
-        </div>
-      ))}
-      <button onClick={addCourse}>+ Add Course</button>
+    <div style={{ display: "flex", flexDirection: "column", gap: "6px", maxHeight: "100%", overflowY: "auto" }}>
+      
+      {/* Average at top */}
+      <div style={{ fontWeight: "bold", color: "white", marginBottom: "6px" }}>
+  Average: {courses.length ? `${weightedAverage.toFixed(2)}%` : "-%"}
+</div>
+
+      {/* Courses list */}
+      <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+        {courses.map(course => (
+          isEditing ? (
+            <div
+              key={course.id}
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "4px",
+                backgroundColor: "rgba(255,255,255,0.05)",
+                padding: "4px 6px",
+                borderRadius: "6px",
+              }}
+            >
+              {/* Course Name */}
+              <input
+                type="text"
+                value={course.name}
+                onChange={e => handleCourseChange(course.id, "name", e.target.value)}
+                placeholder="Course name"
+                style={{ width: "100%", padding: "4px", borderRadius: "4px" }}
+              />
+
+              {/* Grade and Credits Row */}
+              <div style={{ display: "flex", gap: "6px" }}>
+                <input
+                  type="number"
+                  value={course.grade || ""}
+                  onChange={e => handleCourseChange(course.id, "grade", e.target.value)}
+                  placeholder="Grade %"
+                  style={{ flex: 1, padding: "4px", borderRadius: "4px" }}
+                  min={0}
+                  max={100}
+                />
+                <input
+                  type="number"
+                  value={course.credits || ""}
+                  onChange={e => handleCourseChange(course.id, "credits", e.target.value)}
+                  placeholder="Credits"
+                  style={{ flex: 1, padding: "4px", borderRadius: "4px" }}
+                  min={1}
+                />
+                <button
+                  className="widget-btn"
+                  onClick={() => handleDeleteCourse(course.id)}
+                  style={{ cursor: "pointer" }}
+                >
+                  🗑️
+                </button>
+              </div>
+            </div>
+          ) : (
+            <div
+              key={course.id}
+              style={{
+                display: "flex",
+                gap: "6px",
+                alignItems: "center",
+                backgroundColor: "rgba(255,255,255,0.05)",
+                padding: "4px 6px",
+                borderRadius: "6px",
+              }}
+            >
+              <span style={{ flex: 2 }}>{course.name}</span>
+              <span style={{ flex: 1 }}>{course.grade}</span>
+              <span style={{ flex: 1 }}>{course.credits}</span>
+            </div>
+          )
+        ))}
+      </div>
+
+      {/* Add Grade button at bottom */}
+      {isEditing && (
+        <button
+          onClick={handleAddCourse}
+          style={{
+            backgroundColor: "#6c00a2",
+            color: "white",
+            border: "none",
+            padding: "6px",
+            borderRadius: "6px",
+            cursor: "pointer",
+            marginTop: "6px",
+          }}
+        >
+          + Add Grade
+        </button>
+      )}
+
+      {/* Confirm edits button */}
+      {isEditing && (
+        <button
+          onClick={confirmChanges}
+          style={{
+            backgroundColor: "#6c00a2",
+            color: "white",
+            border: "none",
+            padding: "6px",
+            borderRadius: "6px",
+            cursor: "pointer",
+            marginTop: "4px",
+          }}
+        >
+          ✅ Confirm
+        </button>
+        )}
+        {/* Edit Grades toggle BELOW the average */}
+{!isEditing && (
+  <button
+    onClick={() => setIsEditing(true)}
+    style={{
+      backgroundColor: "#6c00a2",
+      color: "white",
+      border: "none",
+      padding: "6px",
+      borderRadius: "6px",
+      cursor: "pointer",
+      marginBottom: "6px",
+    }}
+  >
+    Edit Grades
+  </button>
+)}
     </div>
   );
 }

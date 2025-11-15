@@ -143,8 +143,9 @@ export default function LinksFolderWidget({ widget, onChange }: Props) {
           border: "none",
           padding: "4px 8px",
           borderRadius: "4px",
-          marginBottom: "8px",
+          marginTop: "6px",
           cursor: "pointer",
+          width: "100%",
         }}
       >
         + Add Link
