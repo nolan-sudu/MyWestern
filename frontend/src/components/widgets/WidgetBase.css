@@ -1,0 +1,30 @@
+.widget-content {
+  width: 100%;
+  height: 100%;
+  padding: 8px;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.25);
+  color: white;
+  font-size: 0.9rem;
+  box-sizing: border-box;
+  overflow: auto;
+}
+
+.widget-content input,
+.widget-content textarea {
+  width: 100%;
+  padding: 4px 6px;
+  margin-bottom: 4px;
+  border-radius: 6px;
+  border: none;
+  background: rgba(0, 0, 0, 0.35);
+  color: white;
+  font-size: 0.9rem;
+  box-sizing: border-box;
+}
+
+.widget-content input:focus,
+.widget-content textarea:focus {
+  outline: 2px solid #6c00a2;
+  background: rgba(0, 0, 0, 0.45);
+}

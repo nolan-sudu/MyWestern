@@ -41,7 +41,7 @@ export default function DashboardNavbar({ user, availableWidgets, onAddWidget }:
         )}
       </div>
 
-      {/* CENTER - User greeting */}
+      {/* CENTER - Greeting */}
       <div className="navbar-center">
         <span>Welcome, {user.name || user.email}!</span>
       </div>

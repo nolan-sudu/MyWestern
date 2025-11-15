@@ -11,6 +11,7 @@ export interface Widget {
   emoji: string;
   size: "1x1" | "1x2";
   spanCol?: number;
+  content?: any;
 }
 
 const ALL_WIDGETS: Widget[] = [
@@ -29,30 +30,41 @@ const ALL_WIDGETS: Widget[] = [
 
 export default function Dashboard() {
   const { user } = useAuth();
+
   const [widgets, setWidgets] = useState<Widget[]>([
+    ALL_WIDGETS[0],
+    ALL_WIDGETS[1],
+    ALL_WIDGETS[2],
   ]);
 
   if (!user) return <Navigate to="/login" />;
 
+  // Add widget from navbar
   const handleAddWidget = (id: string) => {
     const widget = ALL_WIDGETS.find((w) => w.id === id);
     if (!widget) return;
-
-    if (widgets.some((w) => w.id === id)) return;
-
+    if (widgets.some((w) => w.id === id)) return; // prevent duplicates
     setWidgets([...widgets, widget]);
   };
 
+  // Remove widget
   const handleRemoveWidget = (id: string) => {
     setWidgets(widgets.filter((w) => w.id !== id));
   };
 
-  // Reordering from drag/drop
+  // Reorder widgets after drag/drop
   const handleReorder = (newOrder: Widget[]) => {
     setWidgets(newOrder);
   };
 
-  // Compute which widgets are still available to add
+  // Update widget content
+  const handleUpdateWidgetContent = (id: string, newContent: any) => {
+    setWidgets((prev) =>
+      prev.map((w) => (w.id === id ? { ...w, content: newContent } : w))
+    );
+  };
+
+  // Compute unused widgets for + dropdown
   const unusedWidgets = ALL_WIDGETS.filter(
     (w) => !widgets.some((active) => active.id === w.id)
   );
@@ -70,6 +82,7 @@ export default function Dashboard() {
           widgets={widgets}
           onRemoveWidget={handleRemoveWidget}
           onReorder={handleReorder}
+          onUpdateWidgetContent={handleUpdateWidgetContent}
         />
       </div>
     </div>
