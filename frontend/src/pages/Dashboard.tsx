@@ -24,7 +24,7 @@ const ALL_WIDGETS: Widget[] = [
   { id: "weather", title: "Local Weather & Alerts", emoji: "☀️", size: "1x1" },
   { id: "gpa", title: "GPA Calculator", emoji: "🎓", size: "1x1" },
   { id: "quote", title: "Daily Quote", emoji: "💡", size: "1x1", spanCol: 2 },
-  { id: "links-folder", title: "Links Folder", emoji: "🔗", size: "1x2" },
+  { id: "links-folder", title: "Links Folder", emoji: "🔗", size: "1x1" },
   { id: "study-timer", title: "Study Timer", emoji: "⏱️", size: "1x2" }
 ];
 

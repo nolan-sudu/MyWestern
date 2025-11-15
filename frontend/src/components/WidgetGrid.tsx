@@ -1,6 +1,6 @@
 import { DragDropContext, Droppable, Draggable, type DropResult } from "@hello-pangea/dnd";
 import "./WidgetGrid.css";
-import type { Widget } from "../types.ts"; // or from types.ts if you moved it
+import type { Widget } from "../types.ts";
 
 // Import all 11 widget components
 import AcademicCalendarWidget from "./widgets/AcademicCalendarWidget.tsx";
@@ -57,6 +57,7 @@ export default function WidgetGrid({ widgets, onRemoveWidget, onReorder, onUpdat
             <div className="widget-grid" ref={provided.innerRef} {...provided.droppableProps}>
               {widgets.map((widget, index) => {
                 const WidgetComponent = widgetMap[widget.id];
+
                 return (
                   <Draggable key={widget.id} draggableId={widget.id} index={index}>
                     {(provided, snapshot) => (
@@ -67,23 +68,41 @@ export default function WidgetGrid({ widgets, onRemoveWidget, onReorder, onUpdat
                         ref={provided.innerRef}
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}
-                        style={{ ...provided.draggableProps.style, zIndex: snapshot.isDragging ? 10 : "auto" }}
+                        style={{
+                          ...provided.draggableProps.style,
+                          zIndex: snapshot.isDragging ? 10 : "auto",
+                          backgroundColor: "rgba(0, 0, 1, 0.55)", // widget box black
+                          color: "white",
+                        }}
                       >
                         <div className="widget-header">
                           <span className="widget-title">
                             {widget.emoji} {widget.title}
                           </span>
                           <div className="widget-actions">
-                            <button className="widget-btn">✏️</button>
+                            { }
                             <button className="widget-btn" onClick={() => onRemoveWidget(widget.id)}>
                               🗑️
                             </button>
                           </div>
                         </div>
 
-                        <div className="widget-content">
+                        { }
+                        <div
+                          className="widget-content"
+                          style={{
+                            backgroundColor: "rgba(0, 0, 1, 0.55)", // dark purple content
+                            padding: "0.5rem",
+                            borderRadius: "8px",
+                            maxHeight: "100%",
+                            overflowY: "auto",
+                          }}
+                        >
                           {WidgetComponent && (
-                            <WidgetComponent widget={widget} onChange={(c: any) => onUpdateWidgetContent(widget.id, c)} />
+                            <WidgetComponent
+                              widget={widget}
+                              onChange={(c: any) => onUpdateWidgetContent(widget.id, c)}
+                            />
                           )}
                         </div>
                       </div>

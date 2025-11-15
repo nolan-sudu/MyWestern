@@ -8,6 +8,7 @@
   font-size: 0.9rem;
   box-sizing: border-box;
   overflow: auto;
+  font-family: Georgia, "Times New Roman", serif;
 }
 
 .widget-content input,
