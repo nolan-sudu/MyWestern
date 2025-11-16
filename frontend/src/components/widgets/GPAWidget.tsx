@@ -4,8 +4,8 @@ import type { Widget } from "../../types";
 interface Course {
   id: string;
   name: string;
-  grade: number;
-  credits: number;
+  grade?: number;
+  credits?: number;
 }
 
 interface Props {
@@ -18,7 +18,7 @@ export default function GPAWidget({ widget, onChange }: Props) {
   const [isEditing, setIsEditing] = useState(false);
 
   const handleAddCourse = () => {
-    const newCourse: Course = { id: Date.now().toString(), name: "", grade: 0, credits: 1 };
+    const newCourse: Course = { id: Date.now().toString(), name: "", grade: undefined, credits: undefined };
     setCourses([...courses, newCourse]);
     setIsEditing(true);
   };
@@ -41,10 +41,10 @@ export default function GPAWidget({ widget, onChange }: Props) {
     setIsEditing(false);
   };
 
-  const totalCredits = courses.reduce((sum, c) => sum + c.credits, 0);
+  const totalCredits = courses.reduce((sum, c) => sum + (c.credits ?? 0), 0);
   const weightedAverage = totalCredits
-    ? courses.reduce((sum, c) => sum + c.grade * c.credits, 0) / totalCredits
-    : 0;
+  ? courses.reduce((sum, c) => sum + ((c.grade ?? 0) * (c.credits ?? 0)), 0) / totalCredits
+  : 0;
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "6px", maxHeight: "100%", overflowY: "auto" }}>
@@ -91,12 +91,13 @@ export default function GPAWidget({ widget, onChange }: Props) {
                 />
                 <input
                   type="number"
-                  value={course.credits || ""}
-                  onChange={e => handleCourseChange(course.id, "credits", e.target.value)}
+                  value={course.credits ?? ""}  // <-- use nullish coalescing
+                  onChange={e => handleCourseChange(course.id, "credits", Number(e.target.value))}
                   placeholder="Credits"
                   style={{ flex: 1, padding: "4px", borderRadius: "4px" }}
                   min={1}
                 />
+
                 <button
                   className="widget-btn"
                   onClick={() => handleDeleteCourse(course.id)}

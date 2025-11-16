@@ -9,23 +9,22 @@ export interface Widget {
   id: string;
   title: string;
   emoji: string;
-  size: "1x1" | "1x2";
-  spanCol?: number;
+  size: "1x1" | "1x2" | "2x1" | "2x2";  
   content?: any;
 }
 
 const ALL_WIDGETS: Widget[] = [
   { id: "academic-calendar", title: "Academic Calendar", emoji: "📅", size: "1x1" },
-  { id: "courses-overview", title: "Courses Overview", emoji: "📚", size: "1x1" },
-  { id: "assignments", title: "Assignments Tracker", emoji: "📝", size: "1x2" },
+  { id: "courses-overview", title: "Courses Overview", emoji: "📚", size: "1x2" },
+  { id: "assignments", title: "Assignments Tracker", emoji: "📝", size: "2x1" },
   { id: "fees", title: "Fees & Finances", emoji: "💰", size: "1x1" },
-  { id: "map", title: "Campus Map", emoji: "🗺️", size: "1x2" },
+  { id: "map", title: "Campus Map", emoji: "🗺️", size: "2x2" },
   { id: "quick-access", title: "Quick Access", emoji: "⚡", size: "1x1" },
   { id: "weather", title: "Local Weather & Alerts", emoji: "☀️", size: "1x1" },
   { id: "gpa", title: "GPA Calculator", emoji: "🎓", size: "1x1" },
-  { id: "quote", title: "Daily Quote", emoji: "💡", size: "1x1", spanCol: 2 },
+  { id: "quote", title: "Daily Quote", emoji: "💡", size: "1x1"},
   { id: "links-folder", title: "Links Folder", emoji: "🔗", size: "1x1" },
-  { id: "study-timer", title: "Study Timer", emoji: "⏱️", size: "1x2" }
+  { id: "study-timer", title: "Study Timer", emoji: "⏱️", size: "1x2"}
 ];
 
 export default function Dashboard() {

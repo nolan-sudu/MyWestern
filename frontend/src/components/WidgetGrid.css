@@ -4,17 +4,19 @@
   justify-content: center;
   padding: 2rem;
   box-sizing: border-box;
+  overflow-x: auto; /* allow horizontal scrolling if widgets overflow */
 }
 
 .widget-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 300px)); /* fixed min and max width */
   grid-auto-rows: 300px;
   gap: 1rem;
-  width: 80%;
+  width: 100%; /* let the grid take container width */
   max-width: 1200px;
 }
 
+/* Widget boxes */
 .widget-box {
   background: rgba(0, 0, 1, 0.55);
   backdrop-filter: blur(12px);
@@ -27,17 +29,16 @@
   display: flex;
   flex-direction: column;
   overflow: visible;
-  max-width: 300px;
-  min-width: 250px;
 }
 
+/* Dragging effect */
 .widget-box.dragging {
   transform: scale(1.03);
   box-shadow: 0 0 28px rgba(0, 0, 0, 0.8);
   z-index: 10;
 }
 
-/* Widget header */
+/* Header */
 .widget-header {
   display: flex;
   justify-content: center;
@@ -52,7 +53,7 @@
   font-weight: bold;
 }
 
-/* Action buttons (Edit/Delete) */
+/* Action buttons */
 .widget-actions {
   position: absolute;
   top: -28px;
@@ -73,6 +74,7 @@
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.9);
 }
 
+/* Buttons */
 .widget-btn {
   background: rgba(14, 14, 14, 0.55);
   border: none;
@@ -90,7 +92,7 @@
   transform: scale(1.1);
 }
 
-/* Widget content */
+/* Content */
 .widget-content {
   flex: 1;
   display: flex;
@@ -101,17 +103,23 @@
   font-size: 0.9rem;
 }
 
-/* Grid sizing */
+/* Sizes */
 .widget-1x1 {
-  grid-row: span 1;
   grid-column: span 1;
+  grid-row: span 1;
 }
 
 .widget-1x2 {
-  grid-row: span 2; /* vertical stack */
-  grid-column: span 1;
+  grid-column: span 2; /* horizontal */
+  grid-row: span 1;
 }
 
-.widget-span-2 {
-  grid-column: span 2; /* horizontal expansion */
+.widget-2x1 {
+  grid-column: span 1;
+  grid-row: span 2; /* vertical */
+}
+
+.widget-2x2 {
+  grid-column: span 2;
+  grid-row: span 2;
 }
