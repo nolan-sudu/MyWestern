@@ -29,3 +29,9 @@
   outline: 2px solid #6c00a2;
   background: rgba(0, 0, 0, 0.45);
 }
+
+a:hover {
+  transform: scale(1.05);
+  background-color: #6c00a2;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.9);
+}
