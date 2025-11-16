@@ -13,7 +13,7 @@
   grid-auto-rows: 300px;
   gap: 1rem;
   width: 100%; /* let the grid take container width */
-  max-width: 1200px;
+  max-width: 1250px;
 }
 
 /* Widget boxes */

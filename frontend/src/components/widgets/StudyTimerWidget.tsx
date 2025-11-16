@@ -70,12 +70,13 @@ export default function StudyTimerWidget({ widget, onChange }: WidgetProps) {
     <div
       className="widget-box"
       style={{
-        backgroundColor: isRest ? "white" : "#dc94e9ff",
-        color: isRest ? "#dc94e9ff" : "white",
+        backgroundColor: isRest ? "white" : "#6c00a2",
+        color: isRest ? "#6c00a2" : "white",
         display: "flex",
         flexDirection: "row",
         alignItems: "center",
         padding: "1rem",
+        maxHeight:"215px"
       }}
     >
       {/* Left: Circular Timer */}
@@ -85,7 +86,7 @@ export default function StudyTimerWidget({ widget, onChange }: WidgetProps) {
             cx="60"
             cy="60"
             r="55"
-            stroke={isRest ? "#dc94e9ff" : "white"}
+            stroke={isRest ? "#6c00a2" : "white"}
             strokeWidth="3"
             fill="none"
             opacity={0.2}
@@ -94,7 +95,7 @@ export default function StudyTimerWidget({ widget, onChange }: WidgetProps) {
             cx="60"
             cy="60"
             r="55"
-            stroke={isRest ? "#dc94e9ff" : "white"}
+            stroke={isRest ? "#6c00a2" : "white"}
             strokeWidth="5.5"
             fill="none"
             strokeDasharray={2 * Math.PI * 55}
@@ -107,14 +108,14 @@ export default function StudyTimerWidget({ widget, onChange }: WidgetProps) {
             cx={60 + 55 * Math.cos((2 * Math.PI * progressPercent() / 100 - Math.PI / 2))}
             cy={60 + 55 * Math.sin((2 * Math.PI * progressPercent() / 100 - Math.PI / 2))}
             r="5"
-            fill={isRest ? "#dc94e9ff" : "white"}
+            fill={isRest ? "#6c00a2" : "white"}
           />
           <text
             x="60"
             y="68"
             textAnchor="middle"
             fontSize="18"
-            fill={isRest ? "#dc94e9ff" : "white"}
+            fill={isRest ? "#6c00a2" : "white"}
           >
             {formatTime(timeLeft)}
           </text>
